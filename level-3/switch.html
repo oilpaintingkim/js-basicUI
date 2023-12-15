@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>switch</title>
+  </head>
+  <body>
+    <div id="quiz">
+      <h1>
+        If these people fall into the water, who are you going to save first?
+      </h1>
+      <button>The Little Mermaid</button>
+      <button>Poseidon</button>
+      <button>Phelps</button>
+    </div>
+
+    <script>
+      document.querySelector('#quiz').addEventListener('click', function (e) {
+        switch (e.target.innerHTML) {
+          case 'The Little Mermaid':
+            alert('You like Mermaid');
+            break;
+          case 'Poseidon':
+            alert('You like Poseidon');
+            break;
+          case 'Phelps':
+            alert('You like Phelps');
+            break;
+          default:
+            alert('please...');
+        }
+      });
+    </script>
+  </body>
+</html>

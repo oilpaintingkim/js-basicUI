@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card</title>
+    <link rel="stylesheet" href="card.css" />
+  </head>
+  <body>
+    <div class="card_background">
+      <div class="card_box">
+        <img src="img/card1.png" alt="" />
+      </div>
+      <div class="card_box">
+        <img src="img/card2.png" alt="" />
+      </div>
+      <div class="card_box">
+        <img src="img/card3.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener('scroll', function () {
+        let scrollHeight = window.scrollY;
+        console.log(scrollHeight);
+
+        // 620 ~ 1037 -> scroll scope
+        let y = (-1 / 417) * scrollHeight + 1037 / 417;
+        let z = -0.00023 * scrollHeight + 479 / 417;
+
+        // let y = a * scrollHeight + b;
+        // 1 = a * 620 + b;
+        // 0 = a * 1037 + b;
+        // a = -1/417
+        // b = 1037/417
+
+        document.querySelectorAll('.card_box')[0].style.opacity = y;
+        document.querySelectorAll(
+          '.card_box'
+        )[0].style.transform = `scale(${z})`;
+      });
+    </script>
+  </body>
+</html>

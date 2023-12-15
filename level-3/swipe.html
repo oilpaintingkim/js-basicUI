@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>swipe</title>
+    <style>
+      img {
+        -webkit-user-drag: none;
+      }
+      .slide {
+        overflow: hidden;
+      }
+
+      .slide-container {
+        width: 300vw;
+      }
+
+      .slide-box {
+        float: left;
+        width: 100vw;
+      }
+
+      .slide-box .image {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="../level-2/img/img1.jpg" class="image" alt="" />
+        </div>
+        <div class="slide-box">
+          <img src="../level-2/img/img2.jpg" class="image" alt="" />
+        </div>
+        <div class="slide-box">
+          <img src="../level-2/img/img3.jpg" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <button class="btn_prev">prev</button>
+    <button class="btn_slide slide-1">1</button>
+    <button class="btn_slide slide-2">2</button>
+    <button class="btn_slide slide-3">3</button>
+    <button class="btn_next">next</button>
+
+    <script>
+      // swipe
+      let startPoint = 0;
+      let isClicked = false;
+      document
+        .querySelectorAll('.slide-box')[0]
+        .addEventListener('mousedown', function (e) {
+          startPoint = e.clientX;
+          isClicked = true;
+        });
+
+      document
+        .querySelectorAll('.slide-box')[0]
+        .addEventListener('mousemove', function (e) {
+          if (isClicked == true) {
+            document.querySelector(
+              '.slide-container'
+            ).style.transform = `translateX(${e.clientX - startPoint}px)`;
+          }
+        });
+
+      document
+        .querySelectorAll('.slide-box')[0]
+        .addEventListener('mouseup', function (e) {
+          isClicked = false;
+
+          if (e.clientX - startPoint < -100) {
+            document.querySelector('.slide-container').style.transition =
+              'all .5s';
+            document.querySelector('.slide-container').style.transform =
+              'translateX(-100vw)';
+          } else {
+            document.querySelector(
+              '.slide-container'
+            ).style.cssText = ` transition : all .5s; translateX(0vw)`;
+          }
+
+          setTimeout(() => {
+            document.querySelector('.slide-container').style.transition =
+              'none';
+          }, 500);
+        });
+    </script>
+    <script>
+      // slide
+      let btnPrev = document.querySelector('.btn_prev');
+      let btnNext = document.querySelector('.btn_next');
+      let btnSlide = document.querySelectorAll('.btn_slide');
+      let slideContainer = document.querySelector('.slide-container');
+      let slideBox = document.querySelectorAll('.slide-box');
+
+      let nowPicture = 0;
+
+      for (let i = 0; i < btnSlide.length; i++) {
+        btnSlide[i].addEventListener('click', () => {
+          slideContainer.style.transform = `translateX(-${i}00vw)`;
+          nowPicture = i;
+          console.log(nowPicture);
+        });
+      }
+
+      btnNext.addEventListener('click', () => {
+        nowPicture++;
+        if (nowPicture == slideBox.length) {
+          nowPicture = 0;
+        }
+        slideContainer.style.transform = `translateX(-${nowPicture}00vw)`;
+      });
+
+      btnPrev.addEventListener('click', () => {
+        nowPicture--;
+        if (nowPicture == -1) {
+          nowPicture = slideBox.length - 1;
+        }
+        slideContainer.style.transform = `translateX(-${nowPicture}00vw)`;
+      });
+    </script>
+  </body>
+</html>

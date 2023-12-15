@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <strong>장바구니 페이지</strong>
+    <ul class="cart_list"></ul>
+    <script>
+      let cartList = document.querySelector('.cart_list');
+      let print = localStorage.getItem('cart');
+      print = JSON.parse(print);
+      print.forEach((a) => {
+        cartList.insertAdjacentHTML('beforeend', `<li>${a}</li>`);
+      });
+    </script>
+  </body>
+</html>
